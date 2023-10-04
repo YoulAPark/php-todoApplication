@@ -10,12 +10,22 @@
 	require_once './Todo.php';
 	
 	if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-		$tNo = $_GET['tNo']; // $_GET 수정 / NULL일 경우 예외처리 / 빈 값일 경우
-		$tNo = Request::get('tNo');
+		$tNo = Request::get('tNo'); // NULL일 경우 예외처리 / 빈 값일 경우
 		$todo = new Todo();
-		$todo->deleteTodo($tNo);
-		header('Location: index.php');
+		$tNoDB = $todo->getTodoOne($tNo);
+
+		if ( is_null($tNo) ) { // 빈 값 일경우
+			echo '<script>alert("값이 들어있지 않습니다.");</script>';
+			exit();
+		} elseif ( !is_int($tNo) ) {
+			echo '<script>alert("숫자만 가능합니다.");</script>';
+			exit();
+		} elseif ( empty($tNoDB) ) { // DB에 들어있는 값이 없을 경우
+			echo '<script>alert("URL값이 잘못되었습니다.");</script>';
+			exit();
+		} else {
+			$todo->deleteTodo($tNo);
+			header('Location: index.php');
+		}
 	}
 ?>
-
-// 예외처리
