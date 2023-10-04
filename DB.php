@@ -49,35 +49,12 @@ class DB {
 	}
 	
 	/**
-	 * 데이터를 DB에 저장하는 역할을 합니다.
-	 *
+	 * DB에 데이터를 저장, 수정, 삭제하는 역할을 합니다.
+	 * 
 	 * @param string $query 쿼리문
 	 * @return bool
 	 */
-	public function insert(string $query):bool {
-		
-		return $this->query($query); 
+	public function executeCUD(string $query):bool {
+		return $this->query($query);
 	}
-	
-	/**
-	 * DB에 있는 데이터를 수정하는 역할을 합니다.
-	 *
-	 * @param string $query 쿼리문
-	 * @return bool
-	 */
-	public function update(string $query):bool {
-		return $this->query($query); 
-	}
-	
-	/**
-	 * DB에 있는 데이터를 삭제하는 역할을 합니다.
-	 *
-	 * @param string $query 쿼리문
-	 * @return bool
-	 */
-	public function delete(string $query):bool {
-		return $this->query($query); 
-	}
-	
-	// insert, update, delete 없애고 query()	
 }

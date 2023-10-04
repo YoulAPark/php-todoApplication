@@ -14,7 +14,7 @@ class Todo {
 	 */
 	public function insertTodo(string $tTitle):void {
 		$query = "INSERT INTO THINGS (tTitle) VALUES ('$tTitle')"; // Injection 알아만보기
-		self::$_connect->insert($query);
+		self::$_connect->executeCUD($query);
 	}
 
 	/**
@@ -25,7 +25,7 @@ class Todo {
 	 */
 	public function deleteTodo(int $tNo):void {
 		$query = "DELETE FROM THINGS WHERE tNo = $tNo";
-		self::$_connect->delete($query);
+		self::$_connect->executeCUD($query);
 	}
 	
 	/**
@@ -37,7 +37,7 @@ class Todo {
 	 */
 	public static function updateTodo(int $tNo, string $tTitle):void {
 		$query = "UPDATE THINGS SET tTitle = '$tTitle' WHERE tNo = $tNo";
-		self::$_connect->update($query);
+		self::$_connect->executeCUD($query);
 	}	
 		
 	/**
@@ -60,6 +60,5 @@ class Todo {
 		$query = "SELECT * FROM THINGS WHERE tNo = $tNo";
 		return self::$_connect->select($query);	
 	}
-	// INSERT, delete, update 쿼리로 바꾸고
 	
 }

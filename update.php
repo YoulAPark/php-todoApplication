@@ -1,9 +1,4 @@
 <?php
-	include("../study/header.php");
-	require_once './Request.php';
-	require_once './DB.php';
-	require_once './Todo.php';
-
 	/**
 	 * 수정을 해야할 일에 대한 정보를 표시하고, 수정한 내용을 받아 UPDATE(수정)의 기능을 하는 페이지입니다.
 	 * 돌아가기를 누를 경우 메인페이지로 이동됩니다.
@@ -11,6 +6,12 @@
 	 * @param int $tNo 수정할 할 일의 고유 번호
 	 * @param string $tTitle 수정할 할 일의 내용
 	 */
+
+	require_once './Request.php';
+	require_once './DB.php';
+	require_once './Todo.php';
+	include '../study/header.php';
+	
 	$todo = new Todo();
 	$tNo = Request::get('tNo'); //
 	// tNo가 Null이거나 빈 값일 경우 예외처리!!!

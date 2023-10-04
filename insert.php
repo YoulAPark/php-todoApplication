@@ -1,9 +1,4 @@
 <?php
-	include("../study/header.php");
-	require_once './Request.php';
-	require_once './DB.php';
-	require_once './Todo.php';
-	
 	/**
 	 * 할 일을 작성하는 페이지 입니다.
 	 * 할 일을 작성하는 곳에 할 일을 작성하고 저장을 누르면 저장을 할 수 있습니다.
@@ -11,6 +6,12 @@
 	 *
 	 * @param string $tTitle 새로 작성한 할 일의 제목
 	 */
+	
+	require_once './Request.php';
+	require_once './DB.php';
+	require_once './Todo.php';
+	include '../study/header.php';
+	
 	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		$tTitle = Request::post('tTitle'); // 없을 경우 NULL, 빈 값(내용이 없을경우) 예외 처리, 길이제한
 		$todo = new Todo();
