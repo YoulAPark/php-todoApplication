@@ -10,7 +10,7 @@
 	require_once './Request.php';
 	require_once './DB.php';
 	require_once './Todo.php';
-	include '../study/header.php';
+	include './js/update.php';
 	
 	$todo = new Todo();
 	$tNo = Request::get('tNo');
@@ -25,6 +25,15 @@
 		echo '<script>alert("' . $content . '");</script>';
 		exit();
 	}
+	
+	// function validateTitle() {
+	// 	var tTitle = document.forms["updateForm"]["tTitle"].value;
+	// 	if(tTitle === "") {
+	// 		$content = '값을 입력해주세요';
+	// 		aleftFunc($content);
+	// 		return false;
+	// 	}
+	// }
 	
 	if (empty($tNo)) {
 		$content = '값이 비어있습니다.';
@@ -41,8 +50,8 @@
 	
 	if ( !empty($DB) ) {
 		if ($_SERVER['REQUEST_METHOD'] === 'POST') {		
-			$tNo = Request::post('titleNo');
-			$tTitle = Request::post('titleName');
+			$tNo = Request::post('tNo');
+			$tTitle = Request::post('tTitle');
 			$todo->updateTodo($tNo, $tTitle);
 			header('Location: index.php');
 		}
@@ -53,7 +62,7 @@
 	
 ?>
 
-<form method="post" action="update.php?tNo=<?php echo $tNo; ?>">
+<form name="updateForm" method="post" action="update.php?tNo=<?php echo $tNo; ?>">
 	<div class="mb-3">
 		<label class="form-label">			
 			<h2>수정하기</h2>
@@ -67,14 +76,14 @@
 				</thead>
 				<tbody>
 					<tr>
-						<input type="hidden" name="titleNo" value="<?php echo $tNo; ?>">
+						<input type="hidden" name="tNo" value="<?php echo $tNo; ?>">
 						<td><?php echo $DB[0]['tTitle']; ?></td>
 					</tr>
 				</tbody>
 			</table>
 		<hr>
-		<input type="text" name="titleName" class="form-control" placeholder="수정할 할 일을 적어주세요">
+		<input type="text" name="tTitle" class="form-control" placeholder="수정할 할 일을 적어주세요">
 	</div>
-	<button type="submit" class="btn">수정</button>
+	<button type="submit" onclick="return validateForm();" class="btn">수정</button>
 	<a href="index.php" class="btn">돌아가기</a>
 </form>
