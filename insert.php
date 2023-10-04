@@ -13,11 +13,24 @@
 	include '../study/header.php';
 	
 	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-		$tTitle = Request::post('tTitle'); // 없을 경우 NULL, 빈 값(내용이 없을경우) 예외 처리, 길이제한
-		$todo = new Todo();
-		$todo->insertTodo($tTitle);
-		header('Location: index.php'); // header에서 location인 경우에만
-		exit();
+		
+		$tTitle = Request::post('tTitle');
+				
+		if (empty($tTitle)) { // $tTitle 값이 비어있을 때
+			echo '<script>alert("empty() : 적을 값이 비어있는지 확인");</script>';
+			echo '<script>history.back();</script>';
+			exit();
+		} elseif(strlen($tTitle)>50) { // $tTitle 값이 50자 초과일 경우
+			echo '<script>alert("50자 내외로 입력부탁드리겠습니다. 입력개수 : ' . strlen($tTitle) . ');</script>';
+			echo "<script>history.back();</script>";
+			// echo '50자 내외로 입력부탁드리겠습니다. 입력개수 : '.strlen($tTitle);
+			exit();
+		} else { 
+			$todo = new Todo();
+			$todo->insertTodo($tTitle);
+			header('Location: index.php'); //header에서 location인 경우에만
+			exit();
+		}
 	}
 ?>
 
