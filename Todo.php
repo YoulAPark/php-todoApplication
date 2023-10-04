@@ -13,7 +13,7 @@ class Todo {
 	 * @return void
 	 */
 	public function insertTodo(string $tTitle):void {
-		$query = "INSERT INTO THINGS (tTitle) VALUES ('$tTitle')";
+		$query = "INSERT INTO THINGS (tTitle) VALUES ('$tTitle')"; // Injection 알아만보기
 		self::$_connect->insert($query);
 	}
 
@@ -56,9 +56,10 @@ class Todo {
 	 * @param int $tNo 고유번호
 	 * @return array
 	 */
-	public function getTodoOne(int $tNo):array {
+	public function getTodoOne(int $tNo):array { //array 반환 아닌 하나 or NULL 반환
 		$query = "SELECT * FROM THINGS WHERE tNo = $tNo";
 		return self::$_connect->select($query);	
 	}
+	// INSERT, delete, update 쿼리로 바꾸고
 	
 }

@@ -1,15 +1,16 @@
 <?php
-	include("../study/header.php");
-	require_once './Request.php';
-	require_once './DB.php';
-	require_once './Todo.php';
-	
 	/**
 	 * 작성한 할 일들의 번호, 내용을 보여주는 페이지 입니다.
 	 * 작성하기를 누를경우 할 일을 작성하는 페이지로 이동할 수 있으며,
 	 * 수정하기를 누를경우 할 일을 수정할 수 있습니다.
 	 * 또한, 삭제하기 버튼을 누르게 되면 작성한 할 일을 삭제할 수 있습니다.
 	 */
+	 
+	require_once './Request.php';
+	require_once './DB.php';
+	require_once './Todo.php';
+	include("../study/header.php"); //!	동일한 문법 동일히 타이핑 헷갈리지 않도록
+	
 	$todo = new Todo();
 	$list = $todo->getTodo();
 	
@@ -28,13 +29,13 @@
 	</tr>
   </thead>
   <tbody>
-	<?php foreach ($list as $lists): ?>
+	<?php foreach ($list as $lists) { ?>
 	<tr>
 	  <th scope="row"><?php echo $lists['tNo'] ?></th>
 	  <td><?php echo $lists['tTitle'] ?></td>
 	  <td><a href="update.php?tNo=<?php echo $lists['tNo'] ?>">수정하기</a></td>
 	  <td><a href="delete.php?tNo=<?php echo $lists['tNo'] ?>">삭제하기</a></td>
 	</tr>
-	<?php endforeach; ?>
+	<?php } ?>
   </tbody>
 </table>

@@ -12,10 +12,11 @@
 	 * @param string $tTitle 새로 작성한 할 일의 제목
 	 */
 	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-		$tTitle = Request::post('tTitle');
+		$tTitle = Request::post('tTitle'); // 없을 경우 NULL, 빈 값(내용이 없을경우) 예외 처리, 길이제한
 		$todo = new Todo();
 		$todo->insertTodo($tTitle);
-		header('Location: index.php');
+		header('Location: index.php'); // header에서 location인 경우에만
+		exit();
 	}
 ?>
 

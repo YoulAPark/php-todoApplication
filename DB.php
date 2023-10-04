@@ -55,6 +55,7 @@ class DB {
 	 * @return bool
 	 */
 	public function insert(string $query):bool {
+		
 		return $this->query($query); 
 	}
 	
@@ -76,5 +77,7 @@ class DB {
 	 */
 	public function delete(string $query):bool {
 		return $this->query($query); 
-	}		
+	}
+	
+	// insert, update, delete 없애고 query()	
 }

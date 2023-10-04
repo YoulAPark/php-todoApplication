@@ -12,18 +12,19 @@
 	 * @param string $tTitle 수정할 할 일의 내용
 	 */
 	$todo = new Todo();
-	$tNo = Request::get('tNo');
-	$list = $todo->getTodoOne($tNo);
+	$tNo = Request::get('tNo'); //
+	// tNo가 Null이거나 빈 값일 경우 예외처리!!!
+	$list = $todo->getTodoOne($tNo); // list Null일 경우 예외처리
 	
 	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-		$tNo = Request::post('titleNo');
-		$tTitle = Request::post('titleName');
-		Todo::updateTodo($tNo, $tTitle);
+		$tNo = Request::post('titleNo'); // tNo를 가진 값이 있는지 없으면 예외처리!
+		$tTitle = Request::post('titleName'); // tNo를 가진 값이 있는지 없으면 예외처리!
+		Todo::updateTodo($tNo, $tTitle); // static선언 쓸 데 없는 행동
 		header('Location: index.php');
 	}
 ?>
 
-<form method="post" action="update.php?tNo=<?php echo $tNo; ?>">
+<form method="post" action="update.php?tNo=<?php echo $tNo; ?>"> <!-- NULL!! 16번라인 -->
 	<div class="mb-3">
 		<label class="form-label">			
 			<h2>수정하기</h2>
@@ -37,7 +38,7 @@
 				</thead>
 				<tbody>
 					<tr>
-						<input type="hidden" name="titleNo" value="<?php echo $tNo; ?>">
+						<input type="hidden" name="titleNo" value="<?php echo $tNo; ?>"> <!-- name="tNo" 같은 변수 -->
 						<td><?php echo $list[0]['tTitle']; ?></td>
 					</tr>
 				</tbody>
