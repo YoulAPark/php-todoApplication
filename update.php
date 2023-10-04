@@ -10,7 +10,7 @@
 	require_once './Request.php';
 	require_once './DB.php';
 	require_once './Todo.php';
-	include './js/update.php';
+	include './js/update/header.php';
 	
 	$todo = new Todo();
 	$tNo = Request::get('tNo');
