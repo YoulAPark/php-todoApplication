@@ -56,7 +56,7 @@ class Todo {
 	 * @param int $tNo 고유번호
 	 * @return array
 	 */
-	public function getTodoOne(int $tNo):?array { //array 반환 아닌 하나 or NULL 반환
+	public function getTodoOne(int $tNo):?array { // array 반환 아닌 하나 or NULL 반환
 		$query = "SELECT * FROM THINGS WHERE tNo = $tNo";
 		return self::$_connect->select($query);	
 	}
