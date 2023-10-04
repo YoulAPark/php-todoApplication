@@ -20,7 +20,8 @@
 	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		$tNo = Request::post('titleNo'); // tNo를 가진 값이 있는지 없으면 예외처리!
 		$tTitle = Request::post('titleName'); // tNo를 가진 값이 있는지 없으면 예외처리!
-		Todo::updateTodo($tNo, $tTitle); // static선언 쓸 데 없는 행동
+		$todo->updateTodo($tNo, $tTitle);
+		// Todo::updateTodo($tNo, $tTitle); // static선언 쓸 데 없는 행동
 		header('Location: index.php');
 	}
 ?>

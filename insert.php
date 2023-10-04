@@ -22,11 +22,11 @@
 ?>
 
 <form method="post" action="insert.php">
-		<div class="mb-3">
-		  <label class="form-label"><h2>작성하기</h2></label>
-		  <hr>
-		  <input type="text" name="tTitle" class="form-control" placeholder="할 일을 작성하는 곳">
-		</div>
+	<div class="mb-3">
+		<label class="form-label"><h2>작성하기</h2></label>
+		<hr>
+		<input type="text" name="tTitle" class="form-control" placeholder="할 일을 작성하는 곳">
+	</div>
 	<button type="submit" class="btn">저장</button>
 	<a href="index.php" class="btn">돌아가기</a>
 </form>
