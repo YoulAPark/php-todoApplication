@@ -6,11 +6,12 @@
 	 */
 
 	require_once './DB.php';
+	require_once './Request.php';
 	require_once './Todo.php';
 	
 	if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 		$tNo = $_GET['tNo']; // $_GET 수정 / NULL일 경우 예외처리 / 빈 값일 경우
-		
+		$tNo = Request::get('tNo');
 		$todo = new Todo();
 		$todo->deleteTodo($tNo);
 		header('Location: index.php');
