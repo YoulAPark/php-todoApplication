@@ -25,7 +25,7 @@
 	}
 ?>
 
-<form method="post" action="update.php?tNo=<?php echo $tNo; ?>"> <!-- NULL!! 16번라인 -->
+<form method="post" action="update.php?tNo=<?php echo $tNo; ?>">
 	<div class="mb-3">
 		<label class="form-label">			
 			<h2>수정하기</h2>
@@ -39,7 +39,7 @@
 				</thead>
 				<tbody>
 					<tr>
-						<input type="hidden" name="titleNo" value="<?php echo $tNo; ?>"> <!-- name="tNo" 같은 변수 -->
+						<input type="hidden" name="titleNo" value="<?php echo $tNo; ?>">
 						<td><?php echo $list[0]['tTitle']; ?></td>
 					</tr>
 				</tbody>
