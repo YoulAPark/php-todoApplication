@@ -13,16 +13,44 @@
 	include '../study/header.php';
 	
 	$todo = new Todo();
-	$tNo = Request::get('tNo'); //
-	// tNo가 Null이거나 빈 값일 경우 예외처리!!!
-	$list = $todo->getTodoOne($tNo); // list Null일 경우 예외처리
+	$tNo = Request::get('tNo');
 	
-	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-		$tNo = Request::post('titleNo'); // tNo를 가진 값이 있는지 없으면 예외처리!
-		$tTitle = Request::post('titleName'); // tNo를 가진 값이 있는지 없으면 예외처리!
-		$todo->updateTodo($tNo, $tTitle);
-		header('Location: index.php');
+	/**
+	 * 값이 비었거나 NULL일 경우, 
+	 * 숫자가 아닌 다른 데이터타입이 들어왔을 경우 창을 띄우는 기능을 합니다.
+	 *
+	 * @param string $content 띄우고 싶은 메세지
+	 */
+	function alertFunc($content) {
+		echo '<script>alert("' . $content . '");</script>';
+		exit();
 	}
+	
+	if (empty($tNo)) {
+		$content = '값이 비어있습니다.';
+		alertFunc($content);
+	} elseif (!isset($tNo)) {
+		$content = '변수가 잘못되었습니다.';
+		alertFunc($content); 
+	} elseif (!is_numeric($tNo)) {
+		$content = '숫자가 아닙니다.';
+		alertFunc($content); 
+	}
+	
+	$DB = $todo->getTodoOne($tNo);
+	
+	if ( !empty($DB) ) {
+		if ($_SERVER['REQUEST_METHOD'] === 'POST') {		
+			$tNo = Request::post('titleNo');
+			$tTitle = Request::post('titleName');
+			$todo->updateTodo($tNo, $tTitle);
+			header('Location: index.php');
+		}
+	} elseif ( empty($DB) ) {
+		$content = '데이터베이스에 값이 존재하지 않습니다.';
+		alertFunc($content);
+	}
+	
 ?>
 
 <form method="post" action="update.php?tNo=<?php echo $tNo; ?>">
@@ -40,7 +68,7 @@
 				<tbody>
 					<tr>
 						<input type="hidden" name="titleNo" value="<?php echo $tNo; ?>">
-						<td><?php echo $list[0]['tTitle']; ?></td>
+						<td><?php echo $DB[0]['tTitle']; ?></td>
 					</tr>
 				</tbody>
 			</table>
