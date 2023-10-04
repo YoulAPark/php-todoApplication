@@ -6,7 +6,6 @@
 	 * 또한, 삭제하기 버튼을 누르게 되면 작성한 할 일을 삭제할 수 있습니다.
 	 */
 	 
-	require_once './Request.php';
 	require_once './DB.php';
 	require_once './Todo.php';
 	include '../study/header.php';

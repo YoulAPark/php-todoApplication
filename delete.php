@@ -8,21 +8,26 @@
 	require_once './DB.php';
 	require_once './Request.php';
 	require_once './Todo.php';
+	require_once './common.php';
 	
 	if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-		$tNo = Request::get('tNo'); // NULL일 경우 예외처리 / 빈 값일 경우
+		
+		$tNo = Request::get('tNo');
 		$todo = new Todo();
 		$tNoDB = $todo->getTodoOne($tNo);
 
-		if ( is_null($tNo) ) { // 빈 값 일경우
-			echo '<script>alert("값이 들어있지 않습니다.");</script>';
-			exit();
-		} elseif ( !is_int($tNo) ) {
-			echo '<script>alert("숫자만 가능합니다.");</script>';
-			exit();
-		} elseif ( empty($tNoDB) ) { // DB에 들어있는 값이 없을 경우
-			echo '<script>alert("URL값이 잘못되었습니다.");</script>';
-			exit();
+		if (is_null($tNo)) { // 빈 값 일경우
+			$content = '값이 들어있지 않습니다.';
+			alertFunc($content);
+			
+		} elseif (!is_int($tNo)) {
+			$content = '숫자만 가능합니다.';
+			alertFunc($content);
+			
+		} elseif (empty($tNoDB)) { // DB에 들어있는 값이 없을 경우
+			$content = 'URL값이 잘못되었습니다.';
+			alertFunc($content);
+			
 		} else {
 			$todo->deleteTodo($tNo);
 			header('Location: index.php');

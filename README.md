@@ -16,6 +16,7 @@ php 연습용으로 구현하였으며, 유저는 오늘의 할 일을 기본적
 - 다양한 함수들의 주석처리
 - php의 GET/POST 방식 구현
 - Database와의 연결 보안 부분
+- 예외처리
 
 ## Image 📷
 <img width="1504" alt="image" src="https://github.com/YoulAPark/php-todoApplication/assets/101085988/6c57a467-5b59-4f1c-bda9-bedfbb37c302">

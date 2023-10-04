@@ -10,6 +10,7 @@
 	require_once './Request.php';
 	require_once './DB.php';
 	require_once './Todo.php';
+	require_once './common.php';
 	include '../study/header.php';
 	
 	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -17,14 +18,13 @@
 		$tTitle = Request::post('tTitle');
 				
 		if (empty($tTitle)) { // $tTitle 값이 비어있을 때
-			echo '<script>alert("empty() : 적을 값이 비어있는지 확인");</script>';
-			echo '<script>history.back();</script>';
-			exit();
-		} elseif(strlen($tTitle)>50) { // $tTitle 값이 50자 초과일 경우
-			echo '<script>alert("50자 내외로 입력부탁드리겠습니다. 입력개수 : ' . strlen($tTitle) . ');</script>';
-			echo "<script>history.back();</script>";
-			// echo '50자 내외로 입력부탁드리겠습니다. 입력개수 : '.strlen($tTitle);
-			exit();
+			$content = 'empty() : 적을 값이 비어있는지 확인';
+			alertFunc($content);
+			
+		} elseif (strlen($tTitle) > 50) { // $tTitle 값이 50자를 초과했을 경우
+			$content = '50자 내외로 입력부탁드리겠습니다. 입력개수 : ' . strlen($tTitle);
+			alertFunc($content);
+			
 		} else { 
 			$todo = new Todo();
 			$todo->insertTodo($tTitle);

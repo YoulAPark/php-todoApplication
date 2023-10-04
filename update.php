@@ -10,37 +10,20 @@
 	require_once './Request.php';
 	require_once './DB.php';
 	require_once './Todo.php';
+	require_once './common.php';
 	include './js/update/header.php';
 	
 	$todo = new Todo();
 	$tNo = Request::get('tNo');
 	
-	/**
-	 * 값이 비었거나 NULL일 경우, 
-	 * 숫자가 아닌 다른 데이터타입이 들어왔을 경우 창을 띄우는 기능을 합니다.
-	 *
-	 * @param string $content 띄우고 싶은 메세지
-	 */
-	function alertFunc($content) {
-		echo '<script>alert("' . $content . '");</script>';
-		exit();
-	}
-	
-	// function validateTitle() {
-	// 	var tTitle = document.forms["updateForm"]["tTitle"].value;
-	// 	if(tTitle === "") {
-	// 		$content = '값을 입력해주세요';
-	// 		aleftFunc($content);
-	// 		return false;
-	// 	}
-	// }
-	
 	if (empty($tNo)) {
 		$content = '값이 비어있습니다.';
 		alertFunc($content);
+		
 	} elseif (!isset($tNo)) {
 		$content = '변수가 잘못되었습니다.';
 		alertFunc($content); 
+		
 	} elseif (!is_numeric($tNo)) {
 		$content = '숫자가 아닙니다.';
 		alertFunc($content); 
