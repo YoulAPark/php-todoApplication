@@ -10,15 +10,15 @@
 	require_once './Request.php';
 	require_once './DB.php';
 	require_once './Todo.php';
-	require_once './common.php';
-	include '../study/header.php';
+	require_once './common/common.php';
+	include './common/header.php';
 	
 	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		
 		$tTitle = Request::post('tTitle');
 				
 		if (empty($tTitle)) { // $tTitle 값이 비어있을 때
-			$content = 'empty() : 적을 값이 비어있는지 확인';
+			$content = '할 일을 입력해주세요';
 			alertFunc($content);
 			
 		} elseif (strlen($tTitle) > 50) { // $tTitle 값이 50자를 초과했을 경우
@@ -28,8 +28,7 @@
 		} else { 
 			$todo = new Todo();
 			$todo->insertTodo($tTitle);
-			header('Location: index.php'); //header에서 location인 경우에만
-			exit();
+			locationIndex();
 		}
 	}
 ?>

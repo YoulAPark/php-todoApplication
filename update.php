@@ -10,8 +10,8 @@
 	require_once './Request.php';
 	require_once './DB.php';
 	require_once './Todo.php';
-	require_once './common.php';
-	include './js/update/header.php';
+	require_once './common/common.php';
+	include './common/update/header.php';
 	
 	$todo = new Todo();
 	$tNo = Request::get('tNo');
@@ -36,7 +36,7 @@
 			$tNo = Request::post('tNo');
 			$tTitle = Request::post('tTitle');
 			$todo->updateTodo($tNo, $tTitle);
-			header('Location: index.php');
+			locationIndex();
 		}
 	} elseif ( empty($DB) ) {
 		$content = '데이터베이스에 값이 존재하지 않습니다.';

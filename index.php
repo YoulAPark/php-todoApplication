@@ -8,10 +8,11 @@
 	 
 	require_once './DB.php';
 	require_once './Todo.php';
-	include '../study/header.php';
+	include './common/header.php';
 	
 	$todo = new Todo();
-	$list = $todo->getTodo();	
+	$list = $todo->getTodo();
+
 ?>
 <h2>To do</h2>
 <hr>

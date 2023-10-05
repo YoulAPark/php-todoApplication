@@ -8,7 +8,7 @@
 	require_once './DB.php';
 	require_once './Request.php';
 	require_once './Todo.php';
-	require_once './common.php';
+	require_once './common/common.php';
 	
 	if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 		
@@ -20,7 +20,7 @@
 			$content = '값이 들어있지 않습니다.';
 			alertFunc($content);
 			
-		} elseif (!is_int($tNo)) {
+		} elseif (!is_numeric($tNo)) { // 데이터타입이 숫자가 아닐경우
 			$content = '숫자만 가능합니다.';
 			alertFunc($content);
 			
@@ -30,7 +30,6 @@
 			
 		} else {
 			$todo->deleteTodo($tNo);
-			header('Location: index.php');
 		}
 	}
 ?>
